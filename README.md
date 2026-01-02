@@ -41,7 +41,7 @@ CMD ["python", "app.py"]
 //docker build -t backend-api .
 //docker run -d -p 5000:5000 backend-api
 
-
+---
 ## 🔹  LAB 2 — Frontend (NGINX)
 frontend/index.html
 <!DOCTYPE html>
