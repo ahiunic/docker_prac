@@ -1,0 +1,68 @@
+# Use the base image with a minimal Linux distribution
+FROM debian:bullseye-slim
+
+# Set environment variables for MySQL root password and other options
+ENV DEBIAN_FRONTEND=noninteractive
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=your_database
+ENV MYSQL_USER=your_username
+ENV MYSQL_PASSWORD=your_password
+
+# Install MySQL server and client
+RUN apt-get update && apt-get install -y mysql-server mysql-client && rm -rf /var/lib/apt/lists/*
+
+# Create the MySQL data directory
+RUN mkdir -p /var/lib/mysql
+
+# Initialize the MySQL data directory and set permissions
+RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql
+
+# Start the MySQL server
+CMD ["mysqld", "--user=mysql"]
+
+# Expose the MySQL port
+EXPOSE 3306
+
+
+
+###############Using Mysql as an Image ########
+
+
+# Use the official MySQL image from Docker Hub
+FROM mysql:latest
+
+# Environment variables to set MySQL root password and other options
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=your_database
+ENV MYSQL_USER=your_username
+ENV MYSQL_PASSWORD=your_password
+
+# Expose the MySQL port
+EXPOSE 3306
+
+# Copy your custom SQL scripts to initialize the database (optional)
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# You can also mount volumes for data persistence (optional)
+VOLUME /var/lib/mysql
+
+# Start the MySQL server
+CMD ["mysqld"]
+
+
+node port---
+
+30000 to 32767
+
+
+      
+       
+       Internete --->>30000--->>Service------>>Pods---services ---node port 
+
+
+abc.com/app3
+abc.com:30001/abc1
+
+
+
+ 

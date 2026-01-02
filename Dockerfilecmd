@@ -1,0 +1,7 @@
+FROM ubuntu:20.04
+
+# Set the default command to run when the container starts
+CMD ["echo", "Hello, world!"]
+
+# Define the entry point for the container
+ENTRYPOINT ["/bin/sh", "-c"]

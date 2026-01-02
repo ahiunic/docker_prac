@@ -1,0 +1,50 @@
+Dockerfile----->>Dockerimage------>>Docker Conatiners
+
+Dockerfile -->>
+FROM Ubuntu
+RUN apt-get update &&  apt install nginx -y
+
+Command--
+docker build -t nginximage  Dockerfile------>>>dockerhub regis
+
+Containers-
+docker run -it --name  nginxCon nginximage
+
+
+if you have already images then how we can create the containers -?
+
+1- docker pull imagename
+2- docker run -it --name  nginxCon nginximage
+docker run --name nginxCon -d -p 8080:80 nginx
+
+hostport---->>from the outside
+container port--->>>
+
+
+FROM Ubuntu
+
+
+
+
+FROM ubuntu
+MAINTAINER ankit@gmail.com ##optional
+RUN apt-get update && apt-get install nginx
+WORKDIR /folder
+COPY snap 
+ADD  
+CMD  ----->> we can override 
+ENTRYPOINT---->>>we can not override ["nginx"   "start"]
+EXPOSE 8080
+
+
+docker run -d --name -p 8080:8080 imagename docker exec -it continaerid /bin/bash 
+
+MAINTAINER
+
+
+application(coding)[9090]-<<------>>  Dcoekrfile[8080]---------->>Containers 8080:8080
+
+
+YES---->>>
+
+it can stop (4 contaoner)--->>>2GB  any time so we need have good backup plan 
