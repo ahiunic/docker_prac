@@ -168,6 +168,76 @@ docker rm $(docker ps -aq)
 docker image prune -f
 docker volume prune -f
 
+-----
+
+🧱 Target Architecture
+Browser
+   ↓
+Frontend Container
+   ↓ (Network A + Network B)
+Backend Container
+   ↓
+Database (optional, Network B only)
+
+
+Frontend Network → frontend-net
+
+Backend Network → backend-net
+
+Backend is connected to both
+
+Frontend and Backend can talk
+
+Frontend cannot see the DB directly
+
+🧪 HANDS-ON LAB — MULTIPLE NETWORKS
+🔹 STEP 1 — Create Two Separate Networks
+docker network create frontend-net
+docker network create backend-net
+
+
+Verify:
+
+docker network ls
+
+🔹 STEP 2 — Run Backend on BACKEND Network First
+docker run -d \
+--name backend \
+--network backend-net \
+backend-api
+
+
+👉 Backend is isolated, frontend can’t reach it yet ❌
+
+🔹 STEP 3 — Attach Backend to FRONTEND Network ALSO
+docker network connect frontend-net backend
+
+
+Now backend belongs to:
+
+backend-net
+
+frontend-net
+
+✅ This container acts as a bridge
+
+🔹 STEP 4 — Run Frontend on FRONTEND Network
+docker run -d \
+--name frontend \
+--network frontend-net \
+-p 8080:80 \
+frontend-ui
+
+🔹 STEP 5 — Connectivity Test (IMPORTANT)
+Exec into frontend container
+docker exec -it frontend sh
+
+Test backend connectivity by name
+ping backend
+
+
+
+---
 
 
 
